@@ -1,27 +1,48 @@
 "use client"
 
+import React from "react"
+import { motion } from "framer-motion"
+
 export default function Loader() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-r from-black via-gray-900 to-white">
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.8 } }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+    >
       <div className="flex flex-col items-center gap-8">
-        {/* Glowing copper pulse animation */}
-        <div className="relative w-24 h-24">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-copper to-copper-light animate-pulse"></div>
-          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-copper-dark to-copper flex items-center justify-center">
-            <div className="text-3xl font-bold text-white">D</div>
-          </div>
-        </div>
+        <motion.h1
+          initial={{ y: 0, opacity: 0 }}
+          animate={{ y: [-6, 0], opacity: 1 }}
+          transition={{ duration: 0.9, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+          className="text-3xl md:text-5xl font-bold text-white tracking-widest"
+        >
+          LOADING
+        </motion.h1>
 
-        {/* Loading text */}
-        <div className="text-center">
-          <h2 className="text-xl font-light text-white tracking-widest">Loading</h2>
-          <div className="flex gap-1 justify-center mt-2">
-            <div className="w-1 h-1 rounded-full bg-copper animate-bounce" style={{ animationDelay: "0s" }}></div>
-            <div className="w-1 h-1 rounded-full bg-copper animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-            <div className="w-1 h-1 rounded-full bg-copper animate-bounce" style={{ animationDelay: "0.4s" }}></div>
-          </div>
-        </div>
+        <motion.div
+          className="flex gap-2 mt-2"
+          initial="init"
+          animate="anim"
+          variants={{
+            init: {},
+            anim: { transition: { staggerChildren: 0.15, repeat: Infinity } },
+          }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              variants={{
+                init: { y: 0, opacity: 0.5 },
+                anim: { y: [0, -8, 0], opacity: [0.6, 1, 0.6] },
+              }}
+              transition={{ duration: 0.9, ease: "easeInOut" }}
+              className="w-2 h-2 rounded-full bg-white/80 inline-block"
+            />
+          ))}
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   )
 }
