@@ -56,8 +56,56 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
 import { LogoLoop } from "../LogoLoop"
 import { TechRing } from "../TechRing"
+
+const TypewriterBlock = ({ text, speed = 30 }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [started, setStarted] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(i));
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [text, speed, started]);
+
+  return (
+    <span ref={elementRef}>
+      {displayedText}
+      <span className="animate-pulse font-bold text-white">_</span>
+    </span>
+  );
+};
 import { GraduationCap, Trophy, Code, Database, Wrench, Sparkles, Cpu } from "lucide-react"
 
 // Variants for staggered entrance
@@ -127,7 +175,7 @@ export default function Slide2() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px] opacity-20 animate-pulse" style={{ animationDelay: "2s" }} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 w-full z-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full z-10 pt-20 lg:pt-0">
         {/* Left Column: Education & Achievements */}
         <motion.div
           initial="hidden"
@@ -242,24 +290,13 @@ export default function Slide2() {
               <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-zinc-500" />
               <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-zinc-500" />
 
-              <p className="text-zinc-300 leading-relaxed text-sm font-mono min-h-[84px]">
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  {"> INITIALIZING BIO SEQUENCE...\n> SUBJECT: Full-stack Engineer & Hardware Researcher.\n> CAPABILITIES: Bridging the gap between software intelligence and physical hardware. Experienced in CubeSat architecture, Drone research, and scalable web systems.".split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.005, delay: index * 0.005 }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </motion.span>
-              </p>
+              <div className="text-zinc-300 leading-relaxed text-sm font-mono min-h-[84px] whitespace-pre-wrap">
+                <TypewriterBlock
+                  text={`> INITIALIZING BIO SEQUENCE...
+> SUBJECT: Full-stack Engineer & Hardware Researcher.
+> CAPABILITIES: Bridging the gap between software intelligence and physical hardware. Experienced in CubeSat architecture, Drone research, and scalable web systems.`}
+                />
+              </div>
             </div>
 
             {/* Skills Grid */}

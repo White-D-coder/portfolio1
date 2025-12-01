@@ -99,7 +99,7 @@ const ProjectCard = ({ project, i }) => {
     >
       {/* Main Card Container with Clip Path */}
       <div
-        className="relative h-full bg-zinc-900/80 backdrop-blur-md border-l-2 border-r-2 border-zinc-800 transition-all duration-300 group-hover:border-[#ef4444]/50 group-hover:bg-zinc-900/90"
+        className="relative h-full bg-zinc-900/80 backdrop-blur-md border-l-2 border-r-2 border-zinc-800 transition-all duration-300 group-hover:border-white/50 group-hover:bg-zinc-900/90"
         style={{
           clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)"
         }}
@@ -107,17 +107,17 @@ const ProjectCard = ({ project, i }) => {
         {/* Animated Border Lines */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
           {/* Top Left Corner */}
-          <div className="absolute top-0 left-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
-          <div className="absolute top-0 left-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
-          <div className="absolute top-0 left-0 w-[20px] h-[20px] border-l border-t border-transparent group-hover:border-[#ef4444]/30" />
+          <div className="absolute top-0 left-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-white transition-colors" />
+          <div className="absolute top-0 left-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-white transition-colors" />
+          <div className="absolute top-0 left-0 w-[20px] h-[20px] border-l border-t border-transparent group-hover:border-white/30" />
 
           {/* Bottom Right Corner */}
-          <div className="absolute bottom-0 right-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
-          <div className="absolute bottom-0 right-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
+          <div className="absolute bottom-0 right-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-white transition-colors" />
+          <div className="absolute bottom-0 right-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-white transition-colors" />
 
           {/* Scanning Line */}
           <motion.div
-            className="absolute top-0 left-0 w-full h-[2px] bg-[#ef4444]/50 shadow-[0_0_10px_#ef4444]"
+            className="absolute top-0 left-0 w-full h-[2px] bg-white/50 shadow-[0_0_10px_white]"
             animate={{ top: isHovering ? ["0%", "100%"] : "0%", opacity: isHovering ? 1 : 0 }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
           />
@@ -129,23 +129,23 @@ const ProjectCard = ({ project, i }) => {
           {/* Header: Icon & Tech ID */}
           <div className="flex justify-between items-start mb-6">
             <div className="relative">
-              <div className="p-3 bg-black/50 border border-zinc-700 rounded-lg text-3xl group-hover:text-[#ef4444] group-hover:border-[#ef4444]/50 transition-all duration-300">
+              <div className="p-3 bg-black/50 border border-zinc-700 rounded-lg text-3xl group-hover:text-white group-hover:border-white/50 transition-all duration-300">
                 {project.icon}
               </div>
               {/* Decorative line connecting icon */}
-              <div className="absolute top-1/2 left-full w-8 h-[1px] bg-zinc-800 group-hover:bg-[#ef4444]/30 transition-colors" />
-              <div className="absolute top-1/2 left-[calc(100%+32px)] w-1 h-1 bg-zinc-600 group-hover:bg-[#ef4444] rounded-full transition-colors" />
+              <div className="absolute top-1/2 left-full w-8 h-[1px] bg-zinc-800 group-hover:bg-white/30 transition-colors" />
+              <div className="absolute top-1/2 left-[calc(100%+32px)] w-1 h-1 bg-zinc-600 group-hover:bg-white rounded-full transition-colors" />
             </div>
 
             <div className="flex flex-col items-end">
-              <span className="text-[10px] font-mono text-[#ef4444] tracking-widest opacity-70">PRJ_0{i + 1}</span>
+              <span className="text-[10px] font-mono text-white tracking-widest opacity-70">PRJ_0{i + 1}</span>
               <div className="flex gap-2 mt-2">
                 {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-[#ef4444] transition-colors">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
                     <Github className="w-4 h-4" />
                   </a>
                 )}
-                <button className="text-zinc-500 hover:text-[#ef4444] transition-colors">
+                <button className="text-zinc-500 hover:text-white transition-colors">
                   <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
@@ -154,10 +154,10 @@ const ProjectCard = ({ project, i }) => {
 
           {/* Title & Description */}
           <div className="mb-auto">
-            <h3 className="text-2xl font-bold text-white mb-2 tracking-wider group-hover:text-[#ef4444] transition-colors" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+            <h3 className="text-2xl font-bold text-white mb-2 tracking-wider group-hover:text-white transition-colors" style={{ fontFamily: "'Orbitron', sans-serif" }}>
               {project.title}
             </h3>
-            <div className="w-12 h-[2px] bg-zinc-800 mb-4 group-hover:w-full group-hover:bg-[#ef4444]/30 transition-all duration-500" />
+            <div className="w-12 h-[2px] bg-zinc-800 mb-4 group-hover:w-full group-hover:bg-white/30 transition-all duration-500" />
             <p className="text-zinc-400 text-sm leading-relaxed font-mono" style={{ fontFamily: "'Share Tech Mono', monospace" }}>
               {project.desc}
             </p>
@@ -169,7 +169,7 @@ const ProjectCard = ({ project, i }) => {
               {project.tech.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 border border-zinc-800 bg-black/30 group-hover:text-[#ef4444] group-hover:border-[#ef4444]/30 transition-all"
+                  className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 border border-zinc-800 bg-black/30 group-hover:text-white group-hover:border-white/30 transition-all"
                 >
                   {tech}
                 </span>
@@ -179,7 +179,7 @@ const ProjectCard = ({ project, i }) => {
 
           {/* Bottom Status Bar */}
           <div className="mt-6 pt-4 border-t border-zinc-800/50 flex justify-between items-center text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
-            <span className="group-hover:text-[#ef4444] transition-colors">Status: Active</span>
+            <span className="group-hover:text-white transition-colors">Status: Active</span>
             <div className="flex items-center gap-2 group-hover:text-white transition-colors cursor-pointer">
               <span>Initialize</span>
               <ArrowUpRight className="w-3 h-3" />
@@ -189,7 +189,7 @@ const ProjectCard = ({ project, i }) => {
       </div>
 
       {/* Background Glow on Hover */}
-      <div className="absolute -inset-1 bg-[#ef4444]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+      <div className="absolute -inset-1 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
     </motion.div>
   )
 }
@@ -251,10 +251,10 @@ export default function Slide3() {
           ease: "linear",
           delay: 2
         }}
-        className="absolute w-2 h-2 bg-[#ef4444] rounded-full shadow-[0_0_20px_#ef4444] z-0 pointer-events-none"
+        className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_20px_white] z-0 pointer-events-none"
       >
         {/* Trail */}
-        <div className="absolute top-1/2 right-full w-20 h-[1px] bg-gradient-to-l from-[#ef4444] to-transparent transform -translate-y-1/2 origin-right rotate-45" />
+        <div className="absolute top-1/2 right-full w-20 h-[1px] bg-gradient-to-l from-white to-transparent transform -translate-y-1/2 origin-right rotate-45" />
       </motion.div>
 
       {/* Second Asteroid (Delayed) */}
@@ -271,9 +271,9 @@ export default function Slide3() {
           ease: "linear",
           delay: 10
         }}
-        className="absolute w-1.5 h-1.5 bg-[#ef4444] rounded-full shadow-[0_0_15px_#ef4444] z-0 pointer-events-none"
+        className="absolute w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_15px_white] z-0 pointer-events-none"
       >
-        <div className="absolute top-1/2 left-full w-16 h-[1px] bg-gradient-to-r from-[#ef4444] to-transparent transform -translate-y-1/2 origin-left -rotate-45" />
+        <div className="absolute top-1/2 left-full w-16 h-[1px] bg-gradient-to-r from-white to-transparent transform -translate-y-1/2 origin-left -rotate-45" />
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
@@ -283,9 +283,9 @@ export default function Slide3() {
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-thin text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl font-thin text-white mb-6 tracking-tight"
           >
-            Featured <span className="font-bold text-[#ef4444]">Projects</span>
+            Featured <span className="font-bold text-white">Projects</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}

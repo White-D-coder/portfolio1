@@ -113,6 +113,35 @@ export default function Slide4() {
         <OrganicIris />
       </div>
 
+      {/* Animated Mecha Image - Holographic Style */}
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 0.8, x: 0 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute left-[-15%] md:left-[-5%] bottom-10 h-[80vh] w-auto z-0 pointer-events-none mix-blend-screen"
+      >
+        <motion.img
+          src="/mecha.jpg"
+          alt="Mecha Schematic"
+          className="h-full w-auto object-contain opacity-50 grayscale invert contrast-125 brightness-110"
+          style={{ scaleX: -1 }}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Scanning Line Overlay */}
+        <motion.div
+          className="absolute inset-0 w-full h-[2px] bg-white/50 shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+          animate={{ top: ["0%", "100%"], opacity: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Holographic Flicker */}
+        <motion.div
+          className="absolute inset-0 bg-white/5 mix-blend-overlay"
+          animate={{ opacity: [0, 0.1, 0] }}
+          transition={{ duration: 0.2, repeat: Infinity, repeatDelay: Math.random() * 5 }}
+        />
+      </motion.div>
+
       {/* Main Content Grid */}
       <motion.div
         initial="hidden"
@@ -138,10 +167,10 @@ export default function Slide4() {
           {/* Left: Title */}
           <motion.h1
             variants={itemVariants}
-            className="text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg mb-12 md:mb-0"
+            className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg mb-12 md:mb-0"
             style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
-            Get in <div><span className="font-bold text-8xl tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>Touch</span></div>
+            Get in <div><span className="font-bold text-6xl sm:text-8xl tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>Touch</span></div>
           </motion.h1>
 
           {/* Right: Floating Feedback Form Card */}

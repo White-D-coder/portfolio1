@@ -21,7 +21,7 @@ export default function Navbar() {
           key={tab.id}
           href={tab.href}
           onMouseEnter={() => setHoveredTab(tab.id)}
-          className="relative px-6 py-2 text-sm font-medium text-white transition-colors duration-300 z-10"
+          className="relative px-3 py-1 md:px-6 md:py-2 text-[10px] md:text-sm font-medium text-white transition-colors duration-300 z-10"
           style={{ fontFamily: "'Orbitron', sans-serif", letterSpacing: "0.1em" }}
         >
           {hoveredTab === tab.id && (

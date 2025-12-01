@@ -37,7 +37,7 @@ export function OrganicIris({ className = "" }) {
                 </defs>
 
                 {/* Background Glow */}
-                <circle r="250" fill="url(#iris-glow)" />
+                <circle cx="0" cy="0" r="250" fill="url(#iris-glow)" />
 
                 {/* Rotating Container for Fibers */}
                 <motion.g
@@ -87,10 +87,11 @@ export function OrganicIris({ className = "" }) {
                 </motion.g>
 
                 {/* Central Void (Pupil) */}
-                <circle r="70" fill="black" />
+                <circle cx="0" cy="0" r="70" fill="black" />
 
                 {/* Pupil Rim */}
                 <motion.circle
+                    cx="0" cy="0"
                     r="70"
                     fill="none"
                     stroke="white"

@@ -75,6 +75,7 @@ export function TechLine({ className = "" }) {
 
                 {/* Moving Pulse on Main Line */}
                 <motion.circle
+                    cx="50" cy="0"
                     r="3"
                     fill="white"
                     className="opacity-80"

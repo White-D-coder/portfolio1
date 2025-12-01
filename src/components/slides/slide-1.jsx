@@ -175,9 +175,54 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import { HexHUD } from "../HexHUD"
 import { TechLine } from "../TechLine"
+
+const TypingEffect = () => {
+  const roles = [
+    "FULL STACK DEVELOPER",
+    "ROBOTIC ENTHUSIAST",
+    "MERN STACK DEVELOPER",
+    "CAD DESIGNER"
+  ];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const fullText = roles[currentRoleIndex];
+
+      if (isDeleting) {
+        setCurrentText(fullText.substring(0, currentText.length - 1));
+        setTypingSpeed(50);
+      } else {
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+        setTypingSpeed(150);
+      }
+
+      if (!isDeleting && currentText === fullText) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && currentText === "") {
+        setIsDeleting(false);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentRoleIndex, typingSpeed, roles]);
+
+  return (
+    <span>
+      {currentText}
+      <span className="animate-pulse font-bold text-white">|</span>
+    </span>
+  );
+};
 
 export default function Slide1() {
   return (
@@ -217,7 +262,7 @@ export default function Slide1() {
           {/* Main Title */}
           <div className="relative">
             <motion.h1
-              className="text-6xl md:text-8xl font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600"
+              className="text-4xl sm:text-6xl md:text-8xl font-black tracking-[0.1em] md:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 leading-tight"
               style={{ fontFamily: "'Orbitron', sans-serif" }}
               initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
               animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
@@ -229,14 +274,14 @@ export default function Slide1() {
             </motion.h1>
 
             {/* Decorative Brackets */}
-            <div className="absolute -left-6 -top-6 w-12 h-12 border-t-2 border-l-2 border-zinc-800" />
-            <div className="absolute -right-6 -bottom-6 w-12 h-12 border-b-2 border-r-2 border-zinc-800" />
+            <div className="absolute -left-4 -top-4 md:-left-6 md:-top-6 w-8 h-8 md:w-12 md:h-12 border-t-2 border-l-2 border-zinc-800" />
+            <div className="absolute -right-4 -bottom-4 md:-right-6 md:-bottom-6 w-8 h-8 md:w-12 md:h-12 border-b-2 border-r-2 border-zinc-800" />
           </div>
 
           {/* Tagline / Role */}
           <div className="space-y-2">
-            <h2 className="text-2xl md:text-3xl font-light text-zinc-300 tracking-[0.15em]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-              FULL STACK <span className="font-bold text-white">DEVELOPER</span>
+            <h2 className="text-2xl md:text-3xl font-light text-zinc-300 tracking-[0.15em] min-h-[40px]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+              <TypingEffect />
             </h2>
             <p className="text-zinc-500 font-mono text-sm max-w-md leading-relaxed tracking-wider">
               <motion.span
@@ -317,32 +362,32 @@ export default function Slide1() {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             {/* Ring 1: Large Outer */}
             <motion.div
-              className="w-[500px] h-[500px] border border-zinc-800 rounded-full border-dashed opacity-30"
+              className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] border border-zinc-800 rounded-full border-dashed opacity-30"
               animate={{ rotate: 360 }}
               transition={{ duration: 60, ease: "linear", repeat: Infinity }}
             />
 
             {/* Ring 2: Medium Tech */}
             <motion.div
-              className="absolute w-[400px] h-[400px] border-2 border-zinc-800 rounded-full border-t-transparent border-b-transparent opacity-50"
+              className="absolute w-[240px] h-[240px] md:w-[400px] md:h-[400px] border-2 border-zinc-800 rounded-full border-t-transparent border-b-transparent opacity-50"
               animate={{ rotate: -360 }}
               transition={{ duration: 40, ease: "linear", repeat: Infinity }}
             />
 
             {/* Ring 3: Fast Inner */}
             <motion.div
-              className="absolute w-[320px] h-[320px] border border-zinc-700 rounded-full border-l-white/20 border-r-white/20"
+              className="absolute w-[180px] h-[180px] md:w-[320px] md:h-[320px] border border-zinc-700 rounded-full border-l-white/20 border-r-white/20"
               animate={{ rotate: 180 }}
               transition={{ duration: 20, ease: "linear", repeat: Infinity }}
             />
 
             {/* Orbiting Elements */}
             <motion.div
-              className="absolute w-[600px] h-[600px]"
+              className="absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px]"
               animate={{ rotate: 360 }}
               transition={{ duration: 30, ease: "linear", repeat: Infinity }}
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_15px_white]" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 md:w-3 md:h-3 bg-white rounded-full shadow-[0_0_15px_white]" />
             </motion.div>
           </div>
 
