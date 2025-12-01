@@ -89,92 +89,112 @@ const cardVariants = {
 
 const ProjectCard = ({ project, i }) => {
   const [isHovering, setIsHovering] = useState(false)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    const { left, top } = currentTarget.getBoundingClientRect()
-    mouseX.set(clientX - left)
-    mouseY.set(clientY - top)
-  }
 
   return (
     <motion.div
       variants={cardVariants}
-      className="group relative bg-zinc-950 rounded-2xl border border-zinc-900 hover:border-zinc-800 transition-all duration-500 overflow-hidden flex flex-col h-full"
+      className="group relative h-full"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      onMouseMove={handleMouseMove}
     >
-      {/* Spotlight Effect */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
+      {/* Main Card Container with Clip Path */}
+      <div
+        className="relative h-full bg-zinc-900/80 backdrop-blur-md border-l-2 border-r-2 border-zinc-800 transition-all duration-300 group-hover:border-[#ef4444]/50 group-hover:bg-zinc-900/90"
         style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 255, 255, 0.1),
-              transparent 80%
-            )
-          `,
+          clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)"
         }}
-      />
+      >
+        {/* Animated Border Lines */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          {/* Top Left Corner */}
+          <div className="absolute top-0 left-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
+          <div className="absolute top-0 left-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
+          <div className="absolute top-0 left-0 w-[20px] h-[20px] border-l border-t border-transparent group-hover:border-[#ef4444]/30" />
 
-      <div className="relative z-10 p-8 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-6">
-          <div className="p-3 bg-zinc-900/50 rounded-xl border border-zinc-800 text-3xl group-hover:scale-110 group-hover:bg-zinc-800 transition-all duration-300 shadow-lg">
-            {project.icon}
-          </div>
-          <div className="flex gap-2">
-            {/* Action Buttons */}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-full transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-            )}
-            <button className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-full transition-colors">
-              <ExternalLink className="w-5 h-5" />
-            </button>
-          </div>
+          {/* Bottom Right Corner */}
+          <div className="absolute bottom-0 right-0 w-[20px] h-[2px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
+          <div className="absolute bottom-0 right-0 w-[2px] h-[20px] bg-zinc-600 group-hover:bg-[#ef4444] transition-colors" />
+
+          {/* Scanning Line */}
+          <motion.div
+            className="absolute top-0 left-0 w-full h-[2px] bg-[#ef4444]/50 shadow-[0_0_10px_#ef4444]"
+            animate={{ top: isHovering ? ["0%", "100%"] : "0%", opacity: isHovering ? 1 : 0 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          />
         </div>
 
-        {/* Content */}
-        <div className="mb-auto">
-          <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gray-100 transition-colors tracking-tight">
-            {project.title}
-          </h3>
-          <p className="text-zinc-500 text-sm leading-relaxed mb-6 group-hover:text-zinc-400 transition-colors">{project.desc}</p>
-        </div>
+        {/* Content Container */}
+        <div className="p-8 flex flex-col h-full relative z-10">
 
-        {/* Tech Stack */}
-        <div className="mt-6 pt-6 border-t border-zinc-900 group-hover:border-zinc-800 transition-colors">
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-2.5 py-1 text-xs font-medium text-zinc-400 bg-zinc-900/50 rounded-md border border-zinc-800 group-hover:border-zinc-700 group-hover:text-zinc-300 transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
+          {/* Header: Icon & Tech ID */}
+          <div className="flex justify-between items-start mb-6">
+            <div className="relative">
+              <div className="p-3 bg-black/50 border border-zinc-700 rounded-lg text-3xl group-hover:text-[#ef4444] group-hover:border-[#ef4444]/50 transition-all duration-300">
+                {project.icon}
+              </div>
+              {/* Decorative line connecting icon */}
+              <div className="absolute top-1/2 left-full w-8 h-[1px] bg-zinc-800 group-hover:bg-[#ef4444]/30 transition-colors" />
+              <div className="absolute top-1/2 left-[calc(100%+32px)] w-1 h-1 bg-zinc-600 group-hover:bg-[#ef4444] rounded-full transition-colors" />
+            </div>
+
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] font-mono text-[#ef4444] tracking-widest opacity-70">PRJ_0{i + 1}</span>
+              <div className="flex gap-2 mt-2">
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-[#ef4444] transition-colors">
+                    <Github className="w-4 h-4" />
+                  </a>
+                )}
+                <button className="text-zinc-500 hover:text-[#ef4444] transition-colors">
+                  <ExternalLink className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* View Project Link */}
-        <div className="mt-6 flex items-center gap-2 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-          <span>View Details</span>
-          <ArrowUpRight className="w-4 h-4" />
+          {/* Title & Description */}
+          <div className="mb-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 tracking-wider group-hover:text-[#ef4444] transition-colors" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+              {project.title}
+            </h3>
+            <div className="w-12 h-[2px] bg-zinc-800 mb-4 group-hover:w-full group-hover:bg-[#ef4444]/30 transition-all duration-500" />
+            <p className="text-zinc-400 text-sm leading-relaxed font-mono" style={{ fontFamily: "'Share Tech Mono', monospace" }}>
+              {project.desc}
+            </p>
+          </div>
+
+          {/* Tech Stack */}
+          <div className="mt-6">
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 border border-zinc-800 bg-black/30 group-hover:text-[#ef4444] group-hover:border-[#ef4444]/30 transition-all"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Status Bar */}
+          <div className="mt-6 pt-4 border-t border-zinc-800/50 flex justify-between items-center text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
+            <span className="group-hover:text-[#ef4444] transition-colors">Status: Active</span>
+            <div className="flex items-center gap-2 group-hover:text-white transition-colors cursor-pointer">
+              <span>Initialize</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Background Glow on Hover */}
+      <div className="absolute -inset-1 bg-[#ef4444]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
     </motion.div>
   )
 }
+
+import { SciFiBackground } from "../SciFiBackground"
 
 export default function Slide3() {
   const projects = [
@@ -207,10 +227,54 @@ export default function Slide3() {
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center bg-black overflow-hidden py-20">
+      {/* Sci-Fi Background */}
+      <div className="absolute inset-0 z-0">
+        <SciFiBackground />
+      </div>
+
       {/* Ambient Background Glow */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[20%] right-[-10%] w-[50%] h-[50%] bg-zinc-900/30 rounded-full blur-[120px] opacity-20" />
       </div>
+
+      {/* Copper Asteroid Animation */}
+      <motion.div
+        initial={{ x: -100, y: -100, opacity: 0 }}
+        animate={{
+          x: ["0vw", "100vw"],
+          y: ["0vh", "100vh"],
+          opacity: [0, 1, 1, 0]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 2
+        }}
+        className="absolute w-2 h-2 bg-[#ef4444] rounded-full shadow-[0_0_20px_#ef4444] z-0 pointer-events-none"
+      >
+        {/* Trail */}
+        <div className="absolute top-1/2 right-full w-20 h-[1px] bg-gradient-to-l from-[#ef4444] to-transparent transform -translate-y-1/2 origin-right rotate-45" />
+      </motion.div>
+
+      {/* Second Asteroid (Delayed) */}
+      <motion.div
+        initial={{ x: "100vw", y: -100, opacity: 0 }}
+        animate={{
+          x: ["100vw", "0vw"],
+          y: ["0vh", "100vh"],
+          opacity: [0, 1, 1, 0]
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 10
+        }}
+        className="absolute w-1.5 h-1.5 bg-[#ef4444] rounded-full shadow-[0_0_15px_#ef4444] z-0 pointer-events-none"
+      >
+        <div className="absolute top-1/2 left-full w-16 h-[1px] bg-gradient-to-r from-[#ef4444] to-transparent transform -translate-y-1/2 origin-left -rotate-45" />
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         {/* Section Header */}
@@ -221,7 +285,7 @@ export default function Slide3() {
             viewport={{ once: true }}
             className="text-5xl md:text-6xl font-thin text-white mb-6 tracking-tight"
           >
-            Featured <span className="font-bold">Projects</span>
+            Featured <span className="font-bold text-[#ef4444]">Projects</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}

@@ -48,6 +48,8 @@
 
 import { motion } from "framer-motion";
 import { Send, UploadCloud, MapPin, Mail, Phone, Facebook, Twitter, Linkedin, Github, Instagram } from "lucide-react";
+import { TechHUD } from "../TechHUD";
+import { OrganicIris } from "../OrganicIris";
 
 // Variants for staggered entrance
 const containerVariants = {
@@ -73,16 +75,15 @@ const itemVariants = {
 // Custom Input Component
 // Note: Input fields are designed to match the white card background.
 const InputField = ({ label, placeholder, type = "text" }) => (
-  <motion.div variants={itemVariants} className="w-full relative pb-4">
+  <motion.div variants={itemVariants} className="w-full relative">
     <label htmlFor={label} className="sr-only">
       {label}
     </label>
     <input
       id={label}
       type={type}
-      // Added a large padding-y for the input area to match the design's spacing
       placeholder={placeholder}
-      className="w-full bg-transparent border-b border-gray-300 text-black placeholder-gray-500 py-3 focus:outline-none focus:border-black transition-colors"
+      className="w-full bg-transparent border-b border-white/20 text-white placeholder-white/40 py-2 focus:outline-none focus:border-white transition-all font-mono text-sm"
     />
   </motion.div>
 );
@@ -90,22 +91,27 @@ const InputField = ({ label, placeholder, type = "text" }) => (
 // Main Component
 export default function Slide4() {
   return (
-    <section className="relative h-screen w-full flex overflow-hidden bg-black text-white">
-      {/* Background Image Container (Mimics the subtle map aesthetic on the dark background) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute inset-0 bg-cover bg-center"
+    <section className="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden" id="contact">
+      {/* Background Map Image */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
-          // Use the dark, subtle photo aesthetic you wanted for the background map feel
-          backgroundImage: "url('/c.png')",
-          backgroundSize: "60% auto", // Subtler appearance
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "bottom left",
-          filter: "grayscale(100%) brightness(20%) contrast(150%)", // High-contrast dark filter
+          backgroundImage: "url('/map-bg.png')", // Assuming you have a map background or similar
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "invert(1) grayscale(1)"
         }}
       />
+
+      {/* Tech HUD Background */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <TechHUD />
+      </div>
+
+      {/* Organic Iris Animation */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-30 mix-blend-screen scale-150 pointer-events-none">
+        <OrganicIris />
+      </div>
 
       {/* Main Content Grid */}
       <motion.div
@@ -135,53 +141,56 @@ export default function Slide4() {
             className="text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg mb-12 md:mb-0"
             style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
-            Get in <div><span className="font-bold text-9xl tracking-widest">Touch</span></div>
+            Get in <div><span className="font-bold text-8xl tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>Touch</span></div>
           </motion.h1>
 
           {/* Right: Floating Feedback Form Card */}
+          {/* Right: Floating Feedback Form Card */}
           <motion.div
             variants={containerVariants}
-            // Increased max-width for better desktop proportions
-            className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-lg shadow-2xl w-full max-w-sm md:max-w-md lg:max-w-lg border border-white/20"
+            className="relative w-full max-w-sm md:max-w-md lg:max-w-lg"
           >
-            <h2 className="text-sm font-semibold text-white mb-6 uppercase tracking-widest border-b pb-2 border-gray-200">
-              Feedback Form
-            </h2>
-            <form onSubmit={(e) => e.preventDefault()}>
-              <InputField label="Name" placeholder="Name" />
-              <InputField label="E-mail" placeholder="E-mail" type="email" />
-              <InputField label="Phone" placeholder="Phone" type="tel" />
-              {/* Message field needs a little height for the placeholder text */}
-              <motion.div variants={itemVariants} className="w-full relative pb-4">
-                <textarea
-                  id="Message"
-                  placeholder="Message"
-                  rows="1" // Start with one row
-                  className="w-full bg-transparent border-b border-gray-300 text-black placeholder-gray-500 py-3 focus:outline-none focus:border-black transition-colors resize-none"
-                />
-              </motion.div>
+            {/* Sleek Glass Container */}
+            <div className="relative bg-white/5 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden group">
 
+              {/* Subtle Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
-              <div className="flex items-center justify-between pt-4">
-                {/* Upload File Button */}
-                <motion.div
-                  variants={itemVariants}
-                  className="flex items-center text-gray-600 cursor-pointer hover:text-black transition-colors"
-                >
-                  {/* <span className="text-sm font-medium">Upload file</span> */}
-                </motion.div>
-
-                {/* Send Message Button (Replicating the dark button with minimal text) */}
-                <motion.button
-                  variants={itemVariants}
-                  type="submit"
-                  className="flex items-center text-white bg-black px-6 py-2 text-sm font-medium tracking-widest uppercase hover:bg-gray-800 transition-colors shadow-lg rounded-sm"
-                >
-                  Send Message
-                  <Send className="w-4 h-4 ml-3" />
-                </motion.button>
+              {/* Header */}
+              <div className="relative z-10 mb-8">
+                <h2 className="text-2xl font-light text-white tracking-widest uppercase" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                  Transmission
+                </h2>
+                <div className="w-12 h-[1px] bg-white/50 mt-4" />
               </div>
-            </form>
+
+              <form onSubmit={(e) => e.preventDefault()} className="relative z-10 space-y-8">
+                <div className="space-y-6">
+                  <InputField label="Name" placeholder="NAME" />
+                  <InputField label="E-mail" placeholder="EMAIL" type="email" />
+                  <InputField label="Phone" placeholder="PHONE" type="tel" />
+
+                  <motion.div variants={itemVariants} className="w-full relative">
+                    <textarea
+                      id="Message"
+                      placeholder="MESSAGE"
+                      rows="2"
+                      className="w-full bg-transparent border-b border-white/20 text-white placeholder-white/40 py-2 focus:outline-none focus:border-white transition-all resize-none font-mono text-sm"
+                    />
+                  </motion.div>
+                </div>
+
+                <div className="pt-4">
+                  <motion.button
+                    variants={itemVariants}
+                    type="submit"
+                    className="w-full bg-white text-black px-8 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center gap-3"
+                  >
+                    Send Signal <Send className="w-4 h-4" />
+                  </motion.button>
+                </div>
+              </form>
+            </div>
           </motion.div>
         </div>
 

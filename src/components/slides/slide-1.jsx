@@ -176,6 +176,9 @@
 
 import { motion } from "framer-motion";
 
+import { HexHUD } from "../HexHUD"
+import { TechLine } from "../TechLine"
+
 export default function Slide1() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white">
@@ -183,6 +186,14 @@ export default function Slide1() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-900/30 rounded-full blur-[120px]" />
+      </div>
+
+      {/* New Animated HUD Elements */}
+      <div className="absolute top-20 right-20 z-0 opacity-40 scale-75 hidden lg:block">
+        <HexHUD />
+      </div>
+      <div className="absolute top-1/2 left-10 -translate-y-1/2 z-0 opacity-40 hidden xl:block">
+        <TechLine />
       </div>
 
       {/* Main Content Container */}
