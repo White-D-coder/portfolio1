@@ -43,10 +43,11 @@
 //     </section>
 //   )
 // }
-"use client";
+
+
 
 import { motion } from "framer-motion";
-import { Send, UploadCloud, MapPin, Mail, Phone, Facebook, Twitter, Linkedin, Github } from "lucide-react";
+import { Send, UploadCloud, MapPin, Mail, Phone, Facebook, Twitter, Linkedin, Github, Instagram } from "lucide-react";
 
 // Variants for staggered entrance
 const containerVariants = {
@@ -132,8 +133,9 @@ export default function Slide4() {
           <motion.h1
             variants={itemVariants}
             className="text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg mb-12 md:mb-0"
+            style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
-            Get in <div><span className="font-bold text-9xl">Touch</span></div>
+            Get in <div><span className="font-bold text-9xl tracking-widest">Touch</span></div>
           </motion.h1>
 
           {/* Right: Floating Feedback Form Card */}
@@ -189,9 +191,8 @@ export default function Slide4() {
           <div className="flex flex-col md:flex-row gap-12 md:gap-20 text-gray-400 text-sm">
             <motion.div variants={itemVariants}>
               <h3 className="uppercase tracking-widest text-white mb-2 border-b border-gray-700 pb-1">Address</h3>
-              <p>123456 Moscow</p>
-              <p>Lane Dyuzheva</p>
-              <p>Building 47, Office 202</p>
+              <p>Pune, India</p>
+              <p>Newton School of Technology</p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -212,15 +213,22 @@ export default function Slide4() {
             {/* Social Icons */}
             <motion.div variants={itemVariants} className="flex space-x-4 mb-4 items-center">
               <span className="text-sm uppercase tracking-wider text-gray-400">
-                — Follow 
+                — Follow
               </span>
-              {[Facebook, Twitter, Linkedin, Github].map((Icon, index) => (
+              {[
+                { Icon: Github, url: "https://github.com/White-D-coder" },
+                { Icon: Linkedin, url: "https://www.linkedin.com/in/deeptanu-bhunia-184426297/" },
+                { Icon: Instagram, url: "https://www.instagram.com/iskybound_/" },
+                { Icon: Twitter, url: "#" },
+              ].map(({ Icon, url }, index) => (
                 <motion.a
                   key={index}
                   variants={itemVariants}
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors p-1 border border-gray-700 rounded-full"
-                  aria-label={Icon.name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors p-2 border border-gray-800 rounded-full hover:bg-white/10 hover:border-white/30"
+                  aria-label={Icon.displayName}
                 >
                   <Icon className="w-4 h-4" />
                 </motion.a>

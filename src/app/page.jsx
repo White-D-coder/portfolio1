@@ -25,10 +25,18 @@ export default function Home() {
       <div className={`transition-opacity duration-1000 ${isLoading ? "opacity-0" : "opacity-100"}`}>
         <Navbar />
         <main className="scroll-smooth">
-          <Slide1 />
-          <Slide2 />
-          <Slide3 />
-          <Slide4 />
+          <div id="home">
+            <Slide1 />
+          </div>
+          <div id="about">
+            <Slide2 />
+          </div>
+          <div id="work">
+            <Slide3 />
+          </div>
+          <div id="contact">
+            <Slide4 />
+          </div>
         </main>
       </div>
     </>

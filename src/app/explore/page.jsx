@@ -1,6 +1,4 @@
-"use client"
-
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function ExplorePage() {
   const explorations = [
@@ -75,7 +73,7 @@ export default function ExplorePage() {
         {/* Back button */}
         <div className="mt-20 text-center">
           <Link
-            href="/"
+            to="/"
             className="inline-flex items-center gap-2 px-6 py-3 text-copper hover:text-copper-light transition-colors font-semibold"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
