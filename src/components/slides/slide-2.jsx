@@ -57,7 +57,7 @@
 
 import { motion } from "framer-motion"
 import { LogoLoop } from "../LogoLoop"
-import { GraduationCap, Trophy, Code, Database, Wrench, Sparkles } from "lucide-react"
+import { GraduationCap, Trophy, Code, Database, Wrench, Sparkles, Cpu } from "lucide-react"
 
 // Variants for staggered entrance
 const containerVariants = {
@@ -193,7 +193,7 @@ export default function Slide2() {
           </div>
         </motion.div>
 
-        {/* Right Column: Bio & Skills (HUD Style) */}
+        {/* Right Column: Bio & Skills (Mission Control Style) */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -203,52 +203,72 @@ export default function Slide2() {
         >
           <motion.div
             variants={itemVariants}
-            className="relative bg-zinc-950/80 p-10 rounded-3xl border border-zinc-900 overflow-hidden group"
+            className="relative bg-zinc-950/90 p-8 rounded-xl border border-zinc-800 overflow-hidden group shadow-2xl"
           >
-            {/* HUD Corner Accents */}
-            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-zinc-800 rounded-tl-3xl group-hover:border-zinc-600 transition-colors" />
-            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-zinc-800 rounded-br-3xl group-hover:border-zinc-600 transition-colors" />
+            {/* Tech Overlay Lines */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-50" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-50" />
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-blue-500/50 to-transparent opacity-50" />
+            <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-transparent via-purple-500/50 to-transparent opacity-50" />
 
-            <div className="flex items-center gap-3 mb-8">
-              <Sparkles className="w-5 h-5 text-zinc-400" />
-              <h2 className="text-3xl font-light text-white tracking-wide">About Me</h2>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8 border-b border-zinc-800 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                  <Sparkles className="w-5 h-5 text-blue-400" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white tracking-wider font-['Orbitron']">MISSION PROFILE</h2>
+                  <p className="text-xs text-blue-400 font-mono tracking-widest">STATUS: ONLINE</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse delay-75" />
+                <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse delay-150" />
+              </div>
             </div>
 
-            <p className="text-zinc-300 leading-relaxed mb-6 text-lg font-light min-h-[84px]">
-              <motion.span
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                {"Full-stack developer skilled in JavaScript, React, Node.js, and scalable architecture. I combine technical expertise with a passion for design to build intelligent, high-performance applications.".split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.01, delay: index * 0.01 }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.span>
-            </p>
-            <p className="text-zinc-500 leading-relaxed text-sm mb-10 border-l-2 border-zinc-800 pl-4">
-              Strong in automation, performance optimization, and DSA with additional expertise in engineering workflows
-              like Arduino and CAD.
-            </p>
+            {/* Bio */}
+            <div className="relative mb-8 bg-zinc-900/50 p-6 rounded-lg border border-zinc-800/50">
+              <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-zinc-600" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-zinc-600" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-zinc-600" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-zinc-600" />
 
-            {/* Categorized Skills - Tech Pills */}
-            <div className="space-y-8">
-              <div>
-                <div className="flex items-center gap-2 mb-4 text-zinc-400">
+              <p className="text-zinc-300 leading-relaxed text-sm font-mono min-h-[84px]">
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  {"> INITIALIZING BIO SEQUENCE...\n> SUBJECT: Full-stack Engineer & Hardware Researcher.\n> CAPABILITIES: Bridging the gap between software intelligence and physical hardware. Experienced in CubeSat architecture, Drone research, and scalable web systems.".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.005, delay: index * 0.005 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              </p>
+            </div>
+
+            {/* Skills Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Software Systems */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-zinc-400 border-b border-zinc-800 pb-2">
                   <Code className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]">Languages</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">Software Systems</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {skills.languages.map((skill) => (
+                  {[...skills.languages, ...skills.frameworks].slice(0, 8).map((skill) => (
                     <span
                       key={skill}
-                      className="px-4 py-1.5 bg-zinc-900/50 text-zinc-300 rounded-full text-xs font-medium border border-zinc-800 hover:border-white/40 hover:text-white hover:bg-zinc-800 transition-all duration-300 cursor-default"
+                      className="px-3 py-1 bg-blue-500/5 text-blue-200 rounded text-[10px] font-mono border border-blue-500/20 hover:bg-blue-500/20 transition-colors cursor-default"
                     >
                       {skill}
                     </span>
@@ -256,33 +276,17 @@ export default function Slide2() {
                 </div>
               </div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-4 text-zinc-400">
-                  <Database className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]">Frameworks</span>
+              {/* Hardware & Engineering */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-zinc-400 border-b border-zinc-800 pb-2">
+                  <Cpu className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-purple-400">Hardware & Eng</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {skills.frameworks.map((skill) => (
+                  {["Fusion 360", "AutoCAD", "LoRa", "CubeSat", "Drone Research", "Arduino"].map((skill) => (
                     <span
                       key={skill}
-                      className="px-4 py-1.5 bg-zinc-900/50 text-zinc-300 rounded-full text-xs font-medium border border-zinc-800 hover:border-white/40 hover:text-white hover:bg-zinc-800 transition-all duration-300 cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-2 mb-4 text-zinc-400">
-                  <Wrench className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]">Tools</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {skills.tools.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-4 py-1.5 bg-zinc-900/50 text-zinc-300 rounded-full text-xs font-medium border border-zinc-800 hover:border-white/40 hover:text-white hover:bg-zinc-800 transition-all duration-300 cursor-default"
+                      className="px-3 py-1 bg-purple-500/5 text-purple-200 rounded text-[10px] font-mono border border-purple-500/20 hover:bg-purple-500/20 transition-colors cursor-default"
                     >
                       {skill}
                     </span>
