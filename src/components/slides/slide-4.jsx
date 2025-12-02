@@ -50,6 +50,7 @@ import { motion } from "framer-motion";
 import { Send, UploadCloud, MapPin, Mail, Phone, Facebook, Twitter, Linkedin, Github, Instagram } from "lucide-react";
 import { TechHUD } from "../TechHUD";
 import { OrganicIris } from "../OrganicIris";
+import { ScrambleHover } from "../ScrambleHover";
 
 // Variants for staggered entrance
 const containerVariants = {
@@ -152,13 +153,11 @@ export default function Slide4() {
       >
         {/* Top Section */}
         <div className="flex justify-between items-start">
-          <motion.a
-            variants={itemVariants}
+          <ScrambleHover
             href="#"
-            className="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors"
-          >
-            Look at google maps
-          </motion.a>
+            text="Look at google maps"
+            className="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors cursor-pointer"
+          />
         </div>
 
         {/* Middle Section: Contact Title & Form */}
