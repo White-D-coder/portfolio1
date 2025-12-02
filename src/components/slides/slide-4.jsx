@@ -155,7 +155,7 @@ export default function Slide4() {
         <div className="flex justify-between items-start">
           <ScrambleHover
             href="#"
-            text="Look at google maps"
+            text="deeptanubhunia"
             className="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors cursor-pointer"
           />
         </div>
