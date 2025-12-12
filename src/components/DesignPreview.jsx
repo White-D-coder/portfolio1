@@ -7,186 +7,156 @@ export const DesignPreview = ({ type }) => {
 
     const renderPreview = () => {
         switch (type) {
-            case "dashboard": // Ground Station
+            case "dashboard": // Ground Station (Satellite/Radar)
                 return (
-                    <svg viewBox="0 0 400 250" className="w-full h-full opacity-80">
-                        {/* Grid Background */}
-                        <defs>
-                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#grid)" />
+                    <svg viewBox="0 0 300 100" className="w-full h-full opacity-80">
+                        {/* Radar Sweep Background */}
+                        <circle cx="150" cy="150" r="140" stroke="rgba(255,255,255,0.1)" strokeWidth="1" fill="none" />
+                        <circle cx="150" cy="150" r="100" stroke="rgba(255,255,255,0.1)" strokeWidth="1" fill="none" />
+                        <circle cx="150" cy="150" r="60" stroke="rgba(255,255,255,0.1)" strokeWidth="1" fill="none" />
 
-                        {/* Sidebar */}
-                        <rect x="10" y="10" width="60" height="230" rx="2" fill="rgba(255,255,255,0.05)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-                        <line x1="20" y1="30" x2="60" y2="30" stroke="white" strokeWidth="2" strokeOpacity="0.5" />
-                        <line x1="20" y1="50" x2="50" y2="50" stroke="white" strokeWidth="2" strokeOpacity="0.3" />
-                        <line x1="20" y1="70" x2="55" y2="70" stroke="white" strokeWidth="2" strokeOpacity="0.3" />
-
-                        {/* Main Map Area */}
-                        <rect x="80" y="10" width="310" height="150" rx="2" fill="rgba(255,255,255,0.02)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-                        {/* Map Path Animation */}
-                        <motion.path
-                            d="M 100 100 L 150 50 L 220 80 L 300 40"
-                            fill="none"
-                            stroke="#3b82f6"
+                        {/* Rotating Radar Line */}
+                        <motion.line
+                            x1="150" y1="150" x2="150" y2="10"
+                            stroke="url(#radarGradient)"
                             strokeWidth="2"
-                            initial={{ pathLength: 0 }}
-                            animate={{ pathLength: 1 }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            animate={{ rotate: 360 }}
+                            style={{ originX: "150px", originY: "150px" }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                         />
-                        <circle cx="100" cy="100" r="3" fill="white" />
-                        <circle cx="300" cy="40" r="3" fill="white" />
-
-                        {/* Bottom Data Panels */}
-                        <rect x="80" y="170" width="90" height="70" rx="2" fill="rgba(255,255,255,0.05)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-                        <rect x="180" y="170" width="90" height="70" rx="2" fill="rgba(255,255,255,0.05)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-                        <rect x="280" y="170" width="110" height="70" rx="2" fill="rgba(255,255,255,0.05)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-
-                        {/* Graph Lines */}
-                        <polyline points="90,220 110,200 130,210 160,190" fill="none" stroke="#22c55e" strokeWidth="1.5" />
-                    </svg>
-                );
-
-            case "mobile": // CanCure
-                return (
-                    <div className="w-full h-full flex justify-center items-center p-4">
-                        <svg viewBox="0 0 150 280" className="h-full w-auto opacity-90">
-                            {/* Phone Frame */}
-                            <rect x="10" y="10" width="130" height="260" rx="15" fill="rgba(0,0,0,0.5)" stroke="white" strokeWidth="2" strokeOpacity="0.5" />
-                            {/* Notch */}
-                            <path d="M 50 10 L 100 10 L 100 25 L 50 25 Z" fill="black" />
-
-                            {/* App Header */}
-                            <rect x="15" y="35" width="120" height="40" rx="5" fill="rgba(255,255,255,0.1)" />
-                            <circle cx="35" cy="55" r="10" fill="rgba(255,255,255,0.3)" />
-                            <rect x="55" y="45" width="60" height="6" rx="3" fill="rgba(255,255,255,0.3)" />
-                            <rect x="55" y="58" width="40" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
-
-                            {/* List Items */}
-                            {[0, 1, 2, 3].map((i) => (
-                                <g key={i} transform={`translate(0, ${i * 45})`}>
-                                    <rect x="20" y="90" width="110" height="35" rx="5" fill="rgba(255,255,255,0.05)" stroke="white" strokeWidth="0.5" strokeOpacity="0.2" />
-                                    <rect x="30" y="100" width="20" height="15" rx="2" fill="#3b82f6" fillOpacity="0.5" />
-                                    <rect x="60" y="100" width="60" height="4" rx="2" fill="rgba(255,255,255,0.3)" />
-                                    <rect x="60" y="110" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" />
-                                </g>
-                            ))}
-
-                            {/* Floating Action Button */}
-                            <circle cx="120" cy="240" r="15" fill="#3b82f6" />
-                            <line x1="120" y1="232" x2="120" y2="248" stroke="white" strokeWidth="2" />
-                            <line x1="112" y1="240" x2="128" y2="240" stroke="white" strokeWidth="2" />
-                        </svg>
-                    </div>
-                );
-
-            case "analytics": // DRACARYS
-                return (
-                    <svg viewBox="0 0 400 250" className="w-full h-full opacity-80">
-                        {/* Background Grid */}
-                        <line x1="40" y1="210" x2="380" y2="210" stroke="white" strokeWidth="1" strokeOpacity="0.5" />
-                        <line x1="40" y1="210" x2="40" y2="20" stroke="white" strokeWidth="1" strokeOpacity="0.5" />
-
-                        {/* Bar Chart */}
-                        {[0.6, 0.8, 0.5, 0.9, 0.7, 0.4, 0.85].map((h, i) => (
-                            <motion.rect
-                                key={i}
-                                x={60 + i * 45}
-                                y={210 - (180 * h)}
-                                width="30"
-                                height={180 * h}
-                                fill="url(#barGradient)"
-                                initial={{ height: 0, y: 210 }}
-                                animate={{ height: 180 * h, y: 210 - (180 * h) }}
-                                transition={{ duration: 1, delay: i * 0.1 }}
-                            />
-                        ))}
-
                         <defs>
-                            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
-                                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
+                            <linearGradient id="radarGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#3b82f6" stopOpacity="1" />
+                                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
                             </linearGradient>
                         </defs>
 
-                        {/* Overlay Line Graph */}
-                        <motion.polyline
-                            points="60,150 105,100 150,160 195,80 240,120 285,180 330,90"
-                            fill="none"
-                            stroke="#ef4444"
-                            strokeWidth="2"
-                            initial={{ pathLength: 0 }}
-                            animate={{ pathLength: 1 }}
-                            transition={{ duration: 2, delay: 1 }}
-                        />
-
-                        {/* Data Points */}
-                        {[
-                            { cx: 60, cy: 150 }, { cx: 105, cy: 100 }, { cx: 150, cy: 160 },
-                            { cx: 195, cy: 80 }, { cx: 240, cy: 120 }, { cx: 285, cy: 180 }, { cx: 330, cy: 90 }
-                        ].map((p, i) => (
-                            <motion.circle
-                                key={i}
-                                cx={p.cx}
-                                cy={p.cy}
-                                r="3"
-                                fill="white"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 1 + (i * 0.2) }}
+                        {/* Satellite Icon */}
+                        <g transform="translate(130, 30)">
+                            <path d="M 10 20 Q 20 30 30 20" stroke="white" fill="none" />
+                            <line x1="20" y1="25" x2="20" y2="10" stroke="white" />
+                            <circle cx="20" cy="10" r="2" fill="#ef4444" />
+                            <motion.circle cx="20" cy="10" r="10" stroke="#ef4444" strokeWidth="1" fill="none"
+                                animate={{ r: [2, 15], opacity: [1, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
                             />
-                        ))}
+                        </g>
+
+                        {/* Data Text */}
+                        <text x="10" y="20" fill="#3b82f6" fontSize="8" fontFamily="monospace">SIGNAL: ACQUIRED</text>
+                        <text x="240" y="20" fill="white" fontSize="8" fontFamily="monospace">SAT_01</text>
                     </svg>
                 );
 
-            case "map": // NavSmart
+            case "mobile": // CanCure (Medical DNA)
                 return (
-                    <svg viewBox="0 0 400 250" className="w-full h-full opacity-80">
-                        {/* Map Grid */}
+                    <svg viewBox="0 0 300 100" className="w-full h-full opacity-80">
+                        {/* DNA Helix Animation */}
+                        <g transform="translate(0, 30)">
+                            <motion.path
+                                d="M 0 20 Q 75 60 150 20 T 300 20"
+                                fill="none"
+                                stroke="#ef4444"
+                                strokeWidth="2"
+                                animate={{ d: ["M 0 20 Q 75 60 150 20 T 300 20", "M 0 20 Q 75 -20 150 20 T 300 20"] }}
+                                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                            />
+                            <motion.path
+                                d="M 0 20 Q 75 -20 150 20 T 300 20"
+                                fill="none"
+                                stroke="#3b82f6"
+                                strokeWidth="2"
+                                animate={{ d: ["M 0 20 Q 75 -20 150 20 T 300 20", "M 0 20 Q 75 60 150 20 T 300 20"] }}
+                                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                            />
+                        </g>
+
+                        {/* Medical Cross Pulse */}
+                        <g transform="translate(140, 40)">
+                            <rect x="8" y="0" width="4" height="20" fill="white" />
+                            <rect x="0" y="8" width="20" height="4" fill="white" />
+                            <motion.rect x="-5" y="-5" width="30" height="30" stroke="white" strokeWidth="1" fill="none"
+                                animate={{ scale: [1, 1.5], opacity: [1, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                            />
+                        </g>
+
+                        <text x="10" y="90" fill="white" fontSize="8" fontFamily="monospace">GENOME_SEQ</text>
+                        <text x="250" y="90" fill="#ef4444" fontSize="8" fontFamily="monospace">MATCH</text>
+                    </svg>
+                );
+
+            case "analytics": // DRACARYS (Target Lock)
+                return (
+                    <svg viewBox="0 0 300 100" className="w-full h-full opacity-80">
+                        {/* Target Reticle */}
+                        <g transform="translate(150, 50)">
+                            <circle cx="0" cy="0" r="30" stroke="#ef4444" strokeWidth="1" fill="none" strokeDasharray="10,5" />
+                            <line x1="-40" y1="0" x2="-20" y2="0" stroke="#ef4444" strokeWidth="2" />
+                            <line x1="20" y1="0" x2="40" y2="0" stroke="#ef4444" strokeWidth="2" />
+                            <line x1="0" y1="-40" x2="0" y2="-20" stroke="#ef4444" strokeWidth="2" />
+                            <line x1="0" y1="20" x2="0" y2="40" stroke="#ef4444" strokeWidth="2" />
+
+                            {/* Locking Animation */}
+                            <motion.circle cx="0" cy="0" r="40" stroke="#ef4444" strokeWidth="1" fill="none"
+                                animate={{ rotate: 90, scale: [1.2, 1] }}
+                                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+                            />
+                            <circle cx="0" cy="0" r="2" fill="#ef4444" />
+                        </g>
+
+                        {/* Scrolling Data */}
+                        <g transform="translate(10, 20)">
+                            {[0, 1, 2].map(i => (
+                                <motion.rect
+                                    key={i}
+                                    x="0" y={i * 10} width={20 + Math.random() * 40} height="4" fill="#ef4444" opacity="0.5"
+                                    animate={{ opacity: [0.2, 0.8, 0.2] }}
+                                    transition={{ duration: 1, delay: i * 0.2, repeat: Infinity }}
+                                />
+                            ))}
+                        </g>
+
+                        <text x="230" y="90" fill="#ef4444" fontSize="8" fontFamily="monospace">TARGET_LOCKED</text>
+                    </svg>
+                );
+
+            case "map": // NavSmart (Path Trace)
+                return (
+                    <svg viewBox="0 0 300 100" className="w-full h-full opacity-80">
+                        {/* Grid */}
                         <defs>
-                            <pattern id="mapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                            <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.1)" />
                             </pattern>
                         </defs>
-                        <rect width="100%" height="100%" fill="url(#mapGrid)" />
+                        <rect width="100%" height="100%" fill="url(#smallGrid)" />
 
-                        {/* Roads */}
-                        <path d="M 0 100 Q 100 100 150 150 T 300 150 T 400 200" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="8" />
-                        <path d="M 100 0 L 100 250" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="6" />
-                        <path d="M 250 0 L 250 250" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="6" />
-
-                        {/* Route */}
+                        {/* Route Path */}
                         <motion.path
-                            d="M 100 50 L 100 120 L 250 120 L 250 200"
+                            d="M 20 50 L 80 50 L 120 20 L 200 20 L 240 80 L 280 80"
                             fill="none"
                             stroke="#eab308"
-                            strokeWidth="3"
-                            strokeDasharray="5,5"
+                            strokeWidth="2"
                             initial={{ pathLength: 0 }}
                             animate={{ pathLength: 1 }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        />
+
+                        {/* Moving Node */}
+                        <motion.circle r="4" fill="white"
+                            animate={{ offsetDistance: "100%" }}
+                            style={{ offsetPath: "path('M 20 50 L 80 50 L 120 20 L 200 20 L 240 80 L 280 80')" }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         />
 
                         {/* Waypoints */}
-                        <circle cx="100" cy="50" r="4" fill="#ef4444" />
-                        <circle cx="250" cy="200" r="4" fill="#22c55e" />
+                        <circle cx="20" cy="50" r="2" fill="#eab308" />
+                        <circle cx="120" cy="20" r="2" fill="#eab308" />
+                        <circle cx="240" cy="80" r="2" fill="#eab308" />
+                        <circle cx="280" cy="80" r="2" fill="#eab308" />
 
-                        {/* Moving Vehicle */}
-                        <motion.circle
-                            r="6"
-                            fill="white"
-                            animate={{
-                                cx: [100, 100, 250, 250],
-                                cy: [50, 120, 120, 200]
-                            }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        />
-
-                        {/* UI Overlay */}
-                        <rect x="10" y="10" width="120" height="40" rx="4" fill="rgba(0,0,0,0.6)" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-                        <text x="20" y="35" fill="white" fontSize="12" fontFamily="monospace">ETA: 12 MIN</text>
+                        <text x="10" y="90" fill="#eab308" fontSize="8" fontFamily="monospace">ROUTE_OPT</text>
                     </svg>
                 );
 
@@ -197,7 +167,7 @@ export const DesignPreview = ({ type }) => {
 
     return (
         <motion.div
-            className="w-full h-28 bg-zinc-900/40 border border-zinc-800 rounded-lg overflow-hidden relative group-hover:border-white/30 transition-colors"
+            className="w-full h-24 bg-zinc-900/40 border border-zinc-800 rounded-lg overflow-hidden relative group-hover:border-white/30 transition-colors"
             variants={variants}
         >
             {renderPreview()}

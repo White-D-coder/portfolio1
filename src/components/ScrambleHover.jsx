@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const CYPHER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-export const ScrambleHover = ({ text, href, className }) => {
+export const ScrambleHover = ({ text = "", href, className }) => {
     const [displayText, setDisplayText] = useState(text);
     const intervalRef = useRef(null);
 

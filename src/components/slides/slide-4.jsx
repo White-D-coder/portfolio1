@@ -92,7 +92,7 @@ const InputField = ({ label, placeholder, type = "text" }) => (
 // Main Component
 export default function Slide4() {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden" id="contact">
+    <section className="relative min-h-dvh w-full flex items-center justify-center bg-black overflow-hidden py-20 lg:py-0" id="contact">
       {/* Background Map Image */}
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"
@@ -105,7 +105,7 @@ export default function Slide4() {
       />
 
       {/* Tech HUD Background */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block">
         <TechHUD />
       </div>
 
@@ -119,7 +119,7 @@ export default function Slide4() {
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 0.8, x: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute left-[-15%] md:left-[-5%] bottom-10 h-[80vh] w-auto z-0 pointer-events-none mix-blend-screen"
+        className="absolute left-[-15%] md:left-[-5%] bottom-10 h-[50vh] md:h-[80vh] w-auto z-0 pointer-events-none mix-blend-screen hidden lg:block"
       >
         <motion.img
           src="/mecha.jpg"
@@ -149,10 +149,10 @@ export default function Slide4() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="relative z-10 w-full h-full p-8 md:p-16 flex flex-col justify-between"
+        className="relative z-10 w-full h-full p-6 md:p-16 flex flex-col justify-between min-h-dvh lg:min-h-0"
       >
         {/* Top Section */}
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start mb-10 lg:mb-0">
           <ScrambleHover
             href="#"
             text="deeptanubhunia"
@@ -162,38 +162,37 @@ export default function Slide4() {
 
         {/* Middle Section: Contact Title & Form */}
         {/* Adjusted items-center for better vertical alignment of the form card */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-10 md:mt-0">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full mt-0 gap-12 lg:gap-0">
           {/* Left: Title */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg mb-12 md:mb-0"
+            className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-white max-w-lg"
             style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
             Get in <div><span className="font-bold text-6xl sm:text-8xl tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" style={{ fontFamily: "'Orbitron', sans-serif" }}>Touch</span></div>
           </motion.h1>
 
           {/* Right: Floating Feedback Form Card */}
-          {/* Right: Floating Feedback Form Card */}
           <motion.div
             variants={containerVariants}
-            className="relative w-full max-w-sm md:max-w-md lg:max-w-lg"
+            className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto lg:mx-0"
           >
             {/* Sleek Glass Container */}
-            <div className="relative bg-white/5 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden group">
+            <div className="relative bg-white/5 backdrop-blur-2xl p-6 md:p-10 rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden group">
 
               {/* Subtle Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
               {/* Header */}
               <div className="relative z-10 mb-8">
-                <h2 className="text-2xl font-light text-white tracking-widest uppercase" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                <h2 className="text-xl md:text-2xl font-light text-white tracking-widest uppercase" style={{ fontFamily: "'Orbitron', sans-serif" }}>
                   Transmission
                 </h2>
                 <div className="w-12 h-[1px] bg-white/50 mt-4" />
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} className="relative z-10 space-y-8">
-                <div className="space-y-6">
+              <form onSubmit={(e) => e.preventDefault()} className="relative z-10 space-y-6 md:space-y-8">
+                <div className="space-y-4 md:space-y-6">
                   <InputField label="Name" placeholder="NAME" />
                   <InputField label="E-mail" placeholder="EMAIL" type="email" />
                   <InputField label="Phone" placeholder="PHONE" type="tel" />
@@ -223,9 +222,9 @@ export default function Slide4() {
         </div>
 
         {/* Bottom Section: Address, Contacts, Socials & Page Number */}
-        <div className="flex justify-between items-end w-full pt-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full pt-16 gap-8 md:gap-0">
           {/* Left: Address and Contacts */}
-          <div className="flex flex-col md:flex-row gap-12 md:gap-20 text-gray-400 text-sm">
+          <div className="flex flex-col sm:flex-row gap-8 md:gap-20 text-gray-400 text-sm w-full md:w-auto">
             <motion.div variants={itemVariants}>
               <h3 className="uppercase tracking-widest text-white mb-2 border-b border-gray-700 pb-1">Address</h3>
               <p>Pune, India</p>
@@ -246,7 +245,7 @@ export default function Slide4() {
           </div>
 
           {/* Right: Social Media & Page Number */}
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-start md:items-end w-full md:w-auto">
             {/* Social Icons */}
             <motion.div variants={itemVariants} className="flex space-x-4 mb-4 items-center">
               <span className="text-sm uppercase tracking-wider text-gray-400">
@@ -271,12 +270,6 @@ export default function Slide4() {
                 </motion.a>
               ))}
             </motion.div>
-
-            {/* Page Number */}
-            {/* <motion.p variants={itemVariants} className="text-xs text-gray-500">
-              1 / 28
-              <span className="ml-2 text-white">Contact Us</span>
-            </motion.p> */}
           </div>
         </div>
       </motion.div>

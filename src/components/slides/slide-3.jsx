@@ -213,7 +213,7 @@ export default function Slide3() {
     },
     {
       title: "DRACARYS",
-      desc: "15kg RoboWars analytics platform with interactive team profiles, CAD model viewers, and match history visualization.",
+      desc: "RoboWars analytics platform with interactive team profiles, CAD model viewers, and match history visualization.",
       type: "analytics",
       tech: ["HTML/CSS", "JavaScript", "AI Chatbot", "Data Viz"],
     },
@@ -226,7 +226,7 @@ export default function Slide3() {
   ]
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center bg-black overflow-hidden py-20">
+    <section className="relative min-h-dvh w-full flex items-center justify-center bg-black overflow-hidden py-10 md:py-20">
       {/* Sci-Fi Background */}
       <div className="absolute inset-0 z-0">
         <SciFiBackground />

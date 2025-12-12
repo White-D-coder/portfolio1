@@ -226,11 +226,11 @@ const TypingEffect = () => {
 
 export default function Slide1() {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white">
+    <section className="relative min-h-dvh w-full flex items-center justify-center overflow-hidden bg-black text-white py-20 lg:py-0">
       {/* Background Grid & Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-900/30 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[800px] md:h-[800px] bg-zinc-900/30 rounded-full blur-[80px] md:blur-[120px]" />
       </div>
 
       {/* New Animated HUD Elements */}
@@ -249,10 +249,10 @@ export default function Slide1() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="order-2 lg:order-1 flex flex-col items-start space-y-8"
+          className="order-2 lg:order-1 flex flex-col items-start space-y-6 md:space-y-8"
         >
           {/* System Status Header */}
-          <div className="flex items-center gap-3 text-zinc-500 font-mono text-xs tracking-[0.2em]">
+          <div className="flex items-center gap-3 text-zinc-500 font-mono text-[10px] md:text-xs tracking-[0.2em]">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]" />
             <span>SYSTEM_ONLINE</span>
             <span className="w-px h-4 bg-zinc-800 mx-2" />
@@ -262,7 +262,7 @@ export default function Slide1() {
           {/* Main Title */}
           <div className="relative">
             <motion.h1
-              className="text-4xl sm:text-6xl md:text-8xl font-black tracking-[0.1em] md:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 leading-tight"
+              className="text-5xl sm:text-6xl md:text-8xl font-black tracking-[0.1em] md:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 leading-tight"
               style={{ fontFamily: "'Orbitron', sans-serif" }}
               initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
               animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
@@ -279,11 +279,11 @@ export default function Slide1() {
           </div>
 
           {/* Tagline / Role */}
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-3xl font-light text-zinc-300 tracking-[0.15em] min-h-[40px]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+          <div className="space-y-2 w-full">
+            <h2 className="text-xl md:text-3xl font-light text-zinc-300 tracking-[0.15em] min-h-[60px] md:min-h-[40px]" style={{ fontFamily: "'Orbitron', sans-serif" }}>
               <TypingEffect />
             </h2>
-            <p className="text-zinc-500 font-mono text-sm max-w-md leading-relaxed tracking-wider">
+            <p className="text-zinc-500 font-mono text-xs md:text-sm max-w-md leading-relaxed tracking-wider">
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -335,10 +335,10 @@ export default function Slide1() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex items-center gap-6 pt-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4 w-full">
             <motion.a
               href="/portfolio"
-              className="relative px-8 py-4 bg-white text-black font-bold tracking-widest uppercase text-sm overflow-hidden clip-path-slant hover:bg-zinc-200 transition-colors"
+              className="relative w-full sm:w-auto text-center px-8 py-4 bg-white text-black font-bold tracking-widest uppercase text-sm overflow-hidden clip-path-slant hover:bg-zinc-200 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               style={{ clipPath: "polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)" }}
@@ -357,33 +357,33 @@ export default function Slide1() {
         </motion.div>
 
         {/* Right Column: Reactor Core / Profile Image */}
-        <div className="order-1 lg:order-2 relative flex items-center justify-center h-[500px] lg:h-[700px]">
+        <div className="order-1 lg:order-2 relative flex items-center justify-center h-[300px] md:h-[500px] lg:h-[700px]">
           {/* Reactor Rings */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             {/* Ring 1: Large Outer */}
             <motion.div
-              className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] border border-zinc-800 rounded-full border-dashed opacity-30"
+              className="w-[280px] h-[280px] md:w-[500px] md:h-[500px] border border-zinc-800 rounded-full border-dashed opacity-30"
               animate={{ rotate: 360 }}
               transition={{ duration: 60, ease: "linear", repeat: Infinity }}
             />
 
             {/* Ring 2: Medium Tech */}
             <motion.div
-              className="absolute w-[240px] h-[240px] md:w-[400px] md:h-[400px] border-2 border-zinc-800 rounded-full border-t-transparent border-b-transparent opacity-50"
+              className="absolute w-[220px] h-[220px] md:w-[400px] md:h-[400px] border-2 border-zinc-800 rounded-full border-t-transparent border-b-transparent opacity-50"
               animate={{ rotate: -360 }}
               transition={{ duration: 40, ease: "linear", repeat: Infinity }}
             />
 
             {/* Ring 3: Fast Inner */}
             <motion.div
-              className="absolute w-[180px] h-[180px] md:w-[320px] md:h-[320px] border border-zinc-700 rounded-full border-l-white/20 border-r-white/20"
+              className="absolute w-[160px] h-[160px] md:w-[320px] md:h-[320px] border border-zinc-700 rounded-full border-l-white/20 border-r-white/20"
               animate={{ rotate: 180 }}
               transition={{ duration: 20, ease: "linear", repeat: Infinity }}
             />
 
             {/* Orbiting Elements */}
             <motion.div
-              className="absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px]"
+              className="absolute w-[320px] h-[320px] md:w-[600px] md:h-[600px]"
               animate={{ rotate: 360 }}
               transition={{ duration: 30, ease: "linear", repeat: Infinity }}
             >
@@ -393,7 +393,7 @@ export default function Slide1() {
 
           {/* Central Profile Image Container */}
           <motion.div
-            className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-zinc-900 shadow-[0_0_50px_rgba(255,255,255,0.1)] z-10"
+            className="relative w-48 h-48 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-zinc-900 shadow-[0_0_50px_rgba(255,255,255,0.1)] z-10"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -411,13 +411,13 @@ export default function Slide1() {
       </div>
 
       {/* Bottom HUD Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-16 border-t border-zinc-900 bg-black/50 backdrop-blur-sm flex items-center justify-between px-8 text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
-        <div className="flex gap-8">
+      <div className="absolute bottom-0 left-0 w-full h-16 border-t border-zinc-900 bg-black/50 backdrop-blur-sm flex items-center justify-between px-4 md:px-8 text-zinc-600 font-mono text-[8px] md:text-[10px] uppercase tracking-widest">
+        <div className="flex gap-4 md:gap-8">
           <span>COORD: 18.5204° N, 73.8567° E</span>
           <span className="hidden md:inline">SECTOR: 7G</span>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="w-24 h-1 bg-zinc-900 rounded-full overflow-hidden">
+          <div className="w-16 md:w-24 h-1 bg-zinc-900 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-zinc-600"
               animate={{ width: ["0%", "100%"] }}

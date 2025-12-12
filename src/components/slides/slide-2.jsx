@@ -168,14 +168,14 @@ export default function Slide2() {
   }
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center bg-black overflow-hidden py-20">
+    <section className="relative min-h-dvh w-full flex flex-col items-center justify-center bg-black overflow-hidden py-10 md:py-20">
       {/* Ambient Background Glow */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px] opacity-20 animate-pulse" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px] opacity-20 animate-pulse" style={{ animationDelay: "2s" }} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full z-10 pt-20 lg:pt-0">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full z-10 pt-10 lg:pt-0">
         {/* Left Column: Education & Achievements */}
         <motion.div
           initial="hidden"
