@@ -126,13 +126,11 @@ const ProjectCard = ({ project, i }) => {
         {/* Content Container */}
         <div className="p-8 flex flex-col h-full relative z-10">
 
-          {/* Header: Icon & Tech ID */}
-          <div className="flex justify-between items-start mb-6">
-            <div className="relative">
-              <div className="p-3 bg-black/50 border border-zinc-700 rounded-lg text-3xl group-hover:text-white group-hover:border-white/50 transition-all duration-300">
-                {project.icon}
-              </div>
-              {/* Decorative line connecting icon */}
+          {/* Header: Design Preview & Tech ID */}
+          <div className="flex flex-col gap-4 mb-6">
+            <div className="relative w-full">
+              <DesignPreview type={project.type} />
+              {/* Decorative line connecting preview */}
               <div className="absolute top-1/2 left-full w-8 h-[1px] bg-zinc-800 group-hover:bg-white/30 transition-colors" />
               <div className="absolute top-1/2 left-[calc(100%+32px)] w-1 h-1 bg-zinc-600 group-hover:bg-white rounded-full transition-colors" />
             </div>
@@ -196,31 +194,33 @@ const ProjectCard = ({ project, i }) => {
 
 import { SciFiBackground } from "../SciFiBackground"
 
+import { DesignPreview } from "../DesignPreview"
+
 export default function Slide3() {
   const projects = [
     {
       title: "Ground Station",
       desc: "Real-time telemetry dashboard for UAVs and robotics. Features live map tracking, system alerts, and data replay support.",
-      icon: "📡",
+      type: "dashboard",
       tech: ["Electron", "React", "Node.js", "Google Maps", "MySQL"],
     },
     {
       title: "CanCure",
       desc: "Healthcare consultation platform connecting patients with verified cancer specialists. Includes medication tracking and scheduling.",
-      icon: "🏥",
+      type: "mobile",
       tech: ["React", "Node.js", "Prisma", "PostgreSQL", "Auth"],
       github: "https://github.com/White-D-coder/CAN-CURE",
     },
     {
       title: "DRACARYS",
-      desc: "RoboWars analytics platform with interactive team profiles, CAD model viewers, and match history visualization.",
-      icon: "🤖",
+      desc: "15kg RoboWars analytics platform with interactive team profiles, CAD model viewers, and match history visualization.",
+      type: "analytics",
       tech: ["HTML/CSS", "JavaScript", "AI Chatbot", "Data Viz"],
     },
     {
       title: "NavSmart",
       desc: "AI-driven automated bus scheduling system with route optimization and real-time tracking capabilities.",
-      icon: "🚌",
+      type: "map",
       tech: ["Vue.js", "Quasar", "Supabase", "Google Maps"],
     },
   ]
