@@ -7,7 +7,6 @@ import Slide1 from "@/components/slides/slide-1"
 import Slide2 from "@/components/slides/slide-2"
 import Slide3 from "@/components/slides/slide-3"
 import Slide4 from "@/components/slides/slide-4"
-import Footer from "@/components/Footer"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,18 +26,17 @@ export default function Home() {
         <Navbar />
         <main className="scroll-smooth">
           <div id="home">
-            <Slide1 />
+            <Slide1 isLoading={isLoading} />
           </div>
           <div id="about">
-            <Slide2 />
+            <Slide2 isLoading={isLoading} />
           </div>
           <div id="work">
-            <Slide3 />
+            <Slide3 isLoading={isLoading} />
           </div>
           <div id="contact">
-            <Slide4 />
+            <Slide4 isLoading={isLoading} />
           </div>
-          <Footer />
         </main>
       </div>
     </>

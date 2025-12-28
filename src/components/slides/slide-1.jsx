@@ -224,7 +224,7 @@ const TypingEffect = () => {
   );
 };
 
-export default function Slide1() {
+export default function Slide1({ isLoading }) {
   return (
     <section className="relative min-h-dvh w-full flex items-center justify-center overflow-hidden bg-black text-white py-20 lg:py-0">
       {/* Background Grid & Ambient Glow */}
@@ -247,7 +247,7 @@ export default function Slide1() {
         {/* Left Column: Text / HUD Data */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="order-2 lg:order-1 flex flex-col items-start space-y-6 md:space-y-8"
         >
@@ -265,7 +265,7 @@ export default function Slide1() {
               className="text-5xl sm:text-6xl md:text-8xl font-black tracking-[0.1em] md:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 leading-tight"
               style={{ fontFamily: "'Orbitron', sans-serif" }}
               initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
-              animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
+              animate={!isLoading ? { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" } : { clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
               transition={{ duration: 1, ease: "circOut", delay: 0.2 }}
             >
               DEEPTANU
@@ -286,7 +286,7 @@ export default function Slide1() {
             <p className="text-zinc-500 font-mono text-xs md:text-sm max-w-md leading-relaxed tracking-wider">
               <motion.span
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 1 }}
               >
                 &gt;{" "}
@@ -300,7 +300,7 @@ export default function Slide1() {
                   <motion.span
                     key={index}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 0.05, delay: 1 + index * 0.05 }}
                   >
                     {char}
@@ -310,7 +310,7 @@ export default function Slide1() {
               <br />
               <motion.span
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 3 }}
               >
                 &gt;{" "}
@@ -324,7 +324,7 @@ export default function Slide1() {
                   <motion.span
                     key={index}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 0.05, delay: 3 + index * 0.03 }}
                   >
                     {char}
@@ -395,7 +395,7 @@ export default function Slide1() {
           <motion.div
             className="relative w-48 h-48 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-zinc-900 shadow-[0_0_50px_rgba(255,255,255,0.1)] z-10"
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            animate={!isLoading ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             <div

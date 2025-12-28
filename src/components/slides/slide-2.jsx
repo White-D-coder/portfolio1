@@ -128,7 +128,7 @@ const itemVariants = {
   },
 }
 
-export default function Slide2() {
+export default function Slide2({ isLoading }) {
   const educationData = [
     {
       year: "2024 - 2028",
@@ -175,11 +175,11 @@ export default function Slide2() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px] opacity-20 animate-pulse" style={{ animationDelay: "2s" }} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full z-10 pt-10 lg:pt-0">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-20 w-full z-10 pt-10 xl:pt-0">
         {/* Left Column: Education & Achievements */}
         <motion.div
           initial="hidden"
-          whileInView="visible"
+          whileInView={!isLoading ? "visible" : "hidden"}
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
           className="space-y-16"
@@ -245,10 +245,10 @@ export default function Slide2() {
         {/* Right Column: Bio & Skills (Mission Control Style - Monochrome) */}
         <motion.div
           initial="hidden"
-          whileInView="visible"
+          whileInView={!isLoading ? "visible" : "hidden"}
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
-          className="lg:pl-8 flex flex-col justify-center relative"
+          className="xl:pl-8 flex flex-col justify-center relative"
         >
           {/* Tech Ring Background */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-40 scale-150">

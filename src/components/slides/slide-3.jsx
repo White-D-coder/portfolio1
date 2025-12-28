@@ -196,7 +196,7 @@ import { SciFiBackground } from "../SciFiBackground"
 
 import { DesignPreview } from "../DesignPreview"
 
-export default function Slide3() {
+export default function Slide3({ isLoading }) {
   const projects = [
     {
       title: "Ground Station",
@@ -281,7 +281,7 @@ export default function Slide3() {
         <div className="text-center mb-20">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-thin text-white mb-6 tracking-tight"
           >
@@ -289,7 +289,7 @@ export default function Slide3() {
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            whileInView={!isLoading ? { opacity: 1 } : { opacity: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-zinc-500 max-w-2xl mx-auto text-lg"
@@ -301,7 +301,7 @@ export default function Slide3() {
         {/* Projects Grid */}
         <motion.div
           initial="hidden"
-          whileInView="visible"
+          whileInView={!isLoading ? "visible" : "hidden"}
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
